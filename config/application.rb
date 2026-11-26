@@ -28,5 +28,10 @@ module Granite
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Rails 7.2 removed Rails.application.secrets; this reads config/secrets.yml.
+    def secrets
+      @_secrets ||= config_for(:secrets)
+    end
   end
 end
