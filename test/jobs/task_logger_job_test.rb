@@ -4,6 +4,11 @@ require "test_helper"
 require "sidekiq/testing"
 
 class TaskLoggerJobTest < ActiveJob::TestCase
+  # Since Rails 7.2 ActiveJob::TestCase keeps the app's adapter unless told otherwise.
+  def queue_adapter_for_test
+    ActiveJob::QueueAdapters::TestAdapter.new
+  end
+
   def setup
     @task = create(:task)
   end

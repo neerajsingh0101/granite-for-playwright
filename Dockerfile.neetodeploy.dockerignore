@@ -1,0 +1,26 @@
+# Build context for Dockerfile.neetodeploy.
+.git
+node_modules
+tmp
+log
+public/assets
+public/packs
+coverage
+spec
+test
+playwright-tests
+selenium-tests
+docs
+doc
+.claude
+.github
+.husky
+.neetoci
+.semaphore
+# Local secrets that a fresh clone never has, kept out of local test builds.
+config/master.key
+config/database.yml
+config/credentials/*.key
+.env
+.env.local
+.env.*.local

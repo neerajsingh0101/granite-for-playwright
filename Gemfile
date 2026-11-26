@@ -2,25 +2,25 @@
 
 source "https://rubygems.org"
 
-ruby "3.2.4"
+ruby "4.0.10"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "7.0.5"
+gem "rails", "~> 8.1.0"
 
 # Use sqlite3 as the database for Active Record in dev and test envs
-gem "sqlite3", "~> 1.4", group: [:development, :test]
+gem "sqlite3", ">= 2.1", group: [:development, :test]
 
 # Use postgres in production since Heroku doesn't support SQLite
-gem "pg", group: [:production]
+gem "pg", "~> 1.6", group: [:production]
 
 # Use Puma as the app server
-gem "puma", "~> 4.1"
+gem "puma", "~> 6.6"
 
-# Use SCSS for stylesheets
-gem "sass-rails", ">= 6"
+# Asset pipeline (config.assets); Rails 7+ no longer includes it
+gem "sprockets-rails"
 
 # Transpile app-like JavaScript. Read more: https://github.com/shakacode/shakapacker
-gem "shakapacker"
+gem "shakapacker", "6.6.0"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
@@ -47,7 +47,11 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bundler-audit"
 
 # For background jobs
-gem "sidekiq", "<7"
+gem "sidekiq", "~> 7.3"
+# sidekiq 7.3 calls ConnectionPool#pop with a timeout, which 3.0 dropped.
+gem "connection_pool", "~> 2.5"
+# Action Cable's redis adapter; sidekiq 6 used to bring it in.
+gem "redis", "~> 5.0"
 
 group :development do
   # Preview email in browser

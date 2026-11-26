@@ -10,7 +10,11 @@
 #
 # https://github.com/mileszs/wicked_pdf/blob/master/README.md
 
+# wkhtmltopdf-binary has no Ubuntu 26.04 build; use the system binary where there is one.
+system_wkhtmltopdf = "/usr/local/bin/wkhtmltopdf"
+
 WickedPdf.config = {
+  **(File.executable?(system_wkhtmltopdf) ? { exe_path: system_wkhtmltopdf } : {})
   # Path to the wkhtmltopdf executable: This usually isn't needed if using
   # one of the wkhtmltopdf-binary family of gems.
   # exe_path: '/usr/local/bin/wkhtmltopdf',
